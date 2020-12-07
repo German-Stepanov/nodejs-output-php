@@ -1,0 +1,27 @@
+{
+  "name": "nodejs-output-view",
+  "version": "1.0.0",
+  "description": "PHP template for nodejs",
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/German-Stepanov/nodejs-output-view.git"
+  },
+  "keywords": [
+    "output",
+    "template",
+    "nodejs"
+  ],
+  "author": "german stepanov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/German-Stepanov/nodejs-output-view/issues"
+  },
+  "homepage": "https://github.com/German-Stepanov/nodejs-output-view#readme"
+}
