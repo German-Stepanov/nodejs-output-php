@@ -1,5 +1,5 @@
 {
-  "name": "output-view",
+  "name": "nodejs-output-view",
   "version": "1.0.3",
   "description": "PHP template for nodejs",
   "main": "server.js",
