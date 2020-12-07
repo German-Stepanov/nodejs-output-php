@@ -1,6 +1,6 @@
 {
-  "name": "nodejs-output-view",
-  "version": "1.0.0",
+  "name": "output-view",
+  "version": "1.0.3",
   "description": "PHP template for nodejs",
   "main": "server.js",
   "dependencies": {},
