@@ -476,5 +476,5 @@ var Output = function (config) {
 	};
 };
 module.exports = function (config) {
-	return (new Output(config)).view;
+	return new Output(config);
 };

@@ -27,13 +27,13 @@
 Очищает код от всех комментариев, пробелов и переносов строк (опционально)
 ```
 
-## Пример кода сервера (файл server.js)
+## Пример кода сервера (файл _demo/server.js)
 ```JavaScript
 //Устанавливаем конфигурацию
 myConfig = {};
 //Конфигурация пользователя (глобальная)
 myConfig.data = {
-	port		: 2011,
+	port		: 2020,
 	isDebug		: true,		//Сообшения сервера
 };
 //Конфигурация модуля Output
@@ -41,13 +41,13 @@ myConfig.output = {
 	//Папка отображений
 	dir 		: require('path').dirname(require.main.filename),
 	//Очищать код		
-	clear 		: true,
+	clear 		: false,
 	//Режим отладки
 	isDebug		: false,						
 };
 
-var output = require('output')(myConfig.output);
-//Подключаем нативный модуль http
+var output = require('output-view')(myConfig.output);
+
 var http = require('http');
 //Формируем задачу
 var app = function(req, res) {
@@ -69,13 +69,13 @@ var app = function(req, res) {
 	res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
 /*	
 	res.write(
-		req.output({
+		req.output.view({
 			text	: 'Hello, World!', 
 		})
 	);
 */
 	res.write(
-		req.output({
+		req.output.view({
 			//Название файла
 			file	: '/test.php', 
 			//Переменные
@@ -96,14 +96,13 @@ var app = function(req, res) {
 		console.timeEnd('app');
 	}
 };
-//Создаем сервер для задачи
+//Создаем и запускаем сервер для задачи
 var server = http.createServer(app);
-//Запускаем сервер
 server.listen(myConfig.data.port);
 //Отображаем информацию о старте сервера
 if (myConfig.data.isDebug) console.log('Server start on port ' + myConfig.data.port + ' ...');
 ```
-## Код отображения (файл test.php)
+## Код отображения (файл _demo/test.php)
 ```HTML+PHP
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -147,9 +146,13 @@ if (myConfig.data.isDebug) console.log('Server start on port ' + myConfig.data.p
 	var a2 = 'http://test.ru'; //Комментарий
 </script>
 ```
-## Результат
+## Запуск
 ```
-Привет, Мир!
+	node server
+```
+## Результат http://localhost:2020
+```
+*Привет, Мир!*
 
 Список участников:
 ----------------------------------

@@ -2,7 +2,7 @@
   "name": "output-view",
   "version": "1.0.3",
   "description": "PHP template for nodejs",
-  "main": "output.js",
+  "main": "index.js",
   "dependencies": {},
   "devDependencies": {},
   "scripts": {},
@@ -12,8 +12,9 @@
   },
   "keywords": [
     "output",
+    "view",
     "template",
-    "nodejs"
+    "php",
   ],
   "author": "german stepanov",
   "license": "MIT",
