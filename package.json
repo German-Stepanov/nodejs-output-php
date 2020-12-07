@@ -1,13 +1,11 @@
 {
-  "name": "nodejs-output-view",
+  "name": "output-view",
   "version": "1.0.3",
   "description": "PHP template for nodejs",
-  "main": "server.js",
+  "main": "output.js",
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "test": "node server.js",
-    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +15,7 @@
     "output",
     "template",
     "nodejs"
+	"php tags"
   ],
   "author": "german stepanov",
   "license": "MIT",
