@@ -1,4 +1,4 @@
-# nodejs-output-php
+# nodejs-output-view
 Шаблонизатор для nodejs
 ```HTML+PHP
 Автоматически подсвечивает php-тэги в любом текстовом редакторе
