@@ -103,15 +103,13 @@ server.listen(myConfig.data.port);
 if (myConfig.data.isDebug) console.log('Server start on port ' + myConfig.data.port + ' ...');
 ```
 ## Код отображения (файл _demo/test.php)
-```HTML
+```HTML+PHP+CSS+JS
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Пример</title>
     <style>
-```
-```css
       body {
         font-family:'Lucida Console', Monaco, monospace
       }
@@ -124,8 +122,6 @@ if (myConfig.data.isDebug) console.log('Server start on port ' + myConfig.data.p
         color:lightgray;
         text-decoration:line-through;
       }
-```
-```HTML+PHP
     </style>
   </head>
     
@@ -145,13 +141,9 @@ if (myConfig.data.isDebug) console.log('Server start on port ' + myConfig.data.p
     </body>
 </html>
 <script>
-```
-```JS
 	/*Комментарий*/
 	var a1 = 1; //Комментарий
 	var a2 = 'http://test.ru'; //Комментарий
-```
-```HTML
 </script>
 ```
 ## Запуск
