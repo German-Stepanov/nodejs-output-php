@@ -148,11 +148,14 @@ if (myConfig.data.isDebug) console.log('Server start on port ' + myConfig.data.p
 ```
 ## Запуск
 ```
-	node server
+node server
 ```
-## Результат http://localhost:2020
+## Результат
 ```
-*Привет, Мир!*
+http://localhost:2020
+```
+
+**Привет, Мир!**
 
 Список участников:
 ----------------------------------
@@ -164,4 +167,4 @@ if (myConfig.data.isDebug) console.log('Server start on port ' + myConfig.data.p
 |       142|    Сергей|  Алексеев|
 |        15|    Герман|  Степанов|
 ----------------------------------
-```
+
