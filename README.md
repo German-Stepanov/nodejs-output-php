@@ -103,7 +103,7 @@ server.listen(myConfig.data.port);
 if (myConfig.data.isDebug) console.log('Server start on port ' + myConfig.data.port + ' ...');
 ```
 ## Код отображения (файл _demo/test.php)
-```HTML+PHP+CSS+JS
+```HTML+PHP
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
