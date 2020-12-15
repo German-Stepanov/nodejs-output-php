@@ -1,11 +1,13 @@
 {
   "name": "output-view",
-  "version": "1.0.5",
-  "description": "PHP template for nodejs",
+  "version": "1.0.6",
+  "description": "PHP template preprocessor for nodejs",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {},
-  "scripts": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/German-Stepanov/nodejs-output-view.git"
@@ -16,7 +18,7 @@
     "template",
     "php"
   ],
-  "author": "german stepanov",
+  "author": "German Stepanov",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/German-Stepanov/nodejs-output-view/issues"

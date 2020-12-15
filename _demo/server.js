@@ -5,17 +5,15 @@ myConfig.data = {
 	port		: 2020,
 	isDebug		: true,		//Сообшения сервера
 };
-//Конфигурация модуля Output
-myConfig.output = {
+
+var output = require('output-view')({
 	//Папка отображений
-	dir 		: require('path').dirname(require.main.filename),
+	dir 		: './',
 	//Очищать код		
 	clear 		: true,
 	//Режим отладки
 	isDebug		: false,						
-};
-
-var output = require('output-view')(myConfig.output);
+});
 
 var http = require('http');
 //Формируем задачу
@@ -25,7 +23,6 @@ var app = function(req, res) {
 		console.log('\nПолучен запрос req.url', req.url);
 		console.time('app');
 	}
-	req.output = output;
 
 	var rows = 
 	[
@@ -39,13 +36,13 @@ var app = function(req, res) {
 	res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
 /*	
 	res.write(
-		req.output.view({
+		output.view({
 			text	: 'Hello, World!', 
 		})
 	);
 */
 	res.write(
-		req.output.view({
+		output.view({
 			//Название файла
 			file	: '/test.php', 
 			//Переменные
@@ -63,9 +60,7 @@ var app = function(req, res) {
 	res.end();
 	
 	//Выводим общее время
-	if (myConfig.data.isDebug) {
-		console.timeEnd('app');
-	}
+	if (myConfig.data.isDebug) console.timeEnd('app');
 };
 //Создаем и запускаем сервер для задачи
 var server = http.createServer(app);

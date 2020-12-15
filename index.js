@@ -3,15 +3,13 @@ var Output = function (config) {
 	var self = this;
 
 	//Формируем конфигурацию
-	config = config || {};
+	this.config = config || {};
 	//Расположение папки отображений относительно папки node_modules
-	config.dir 		= config.dir==null ? require('path').dirname(require.main.filename) : config.dir;	
+	this.config.dir 	= this.config.dir || './';	
 	//Режим отладки
-	config.isDebug  = config.isDebug==null ? false : Boolean (config.isDebug);
+	this.config.isDebug  = this.config.isDebug==null ? false : Boolean (this.config.isDebug);
 	//Очищать код
-	config.clear = config.clear==null || config.isDebug ? false : Boolean (config.clear);
-	
-	this.dir = config.dir==null ? require('path').dirname(require.main.filename) : config.dir;
+	this.config.clear = this.config.clear==null || config.isDebug ? false : Boolean (this.config.clear);
 	
 	this.error = function (text) {
 		return '<div style="color:red">ERROR OUTPUT: <b>' + text + '</b></div>';
@@ -64,8 +62,8 @@ var Output = function (config) {
 		params.data 	= params.data || {};
 
 		//Проверяем существование
-		if (params.file && !require('fs').existsSync(self.dir + params.file)) {
-			return self.error('Не найден файл "' + self.dir + params.file + '"');
+		if (params.file && !require('fs').existsSync(self.config.dir + params.file)) {
+			return self.error('Не найден файл "' + self.config.dir + params.file + '"');
 		}
 		
 		//Первоначальный код
@@ -86,9 +84,9 @@ var Output = function (config) {
 		//Считывание файла или текста
 		if (params.file) {
 			try {
-				input = require('fs').readFileSync(config.dir + params.file, 'utf8');
+				input = require('fs').readFileSync(self.config.dir + params.file, 'utf8');
 			} catch (e) {
-				return self.error(['Ошибка чтения файла "' + self.dir + params.file + '"', e.toString()].join(': '));
+				return self.error(['Ошибка чтения файла "' + self.config.dir + params.file + '"', e.toString()].join(': '));
 			};
 		} else {
 			input = params.text + '';
@@ -112,11 +110,11 @@ var Output = function (config) {
 			};
 		};
 
-		if (config.isDebug) output += self.debug(['Входные данные params.data', JSON.stringify(params.data, null, 4)].join(': '));
+		if (this.config.isDebug) output += self.debug(['Входные данные params.data', JSON.stringify(params.data, null, 4)].join(': '));
 
 		if (input) {
 			//Разбираем код на блоки
-			if (config.isDebug) output += self.debug(['Разбираем код на блоки...'].join(': '));
+			if (this.config.isDebug) output += self.debug(['Разбираем код на блоки...'].join(': '));
 			
 			//Извлекаем блок кода (с кодом html и php)
 			var result = input.replace(self.re['html_php'], function (s, html, php) {
@@ -271,14 +269,14 @@ var Output = function (config) {
 				return ''; //удаляем код блока HTML и PHP
 			});
 
-			if (config.isDebug) output += self.debug(['Сформированы блоки', JSON.stringify(blocks, null, 4)].join(': '));
+			if (this.config.isDebug) output += self.debug(['Сформированы блоки', JSON.stringify(blocks, null, 4)].join(': '));
 			
 			//Перебор блоков (используем ТОЛЬКО цикл for для формирования переменных в пространстве окружения)
-			if (config.isDebug) output += self.debug(['Перебор блоков...'].join(': '));
+			if (this.config.isDebug) output += self.debug(['Перебор блоков...'].join(': '));
 	
 			for (var i=0; i<blocks.length; i++) {
 				
-				if (config.isDebug) output += self.debug(['block[' + i + ']=' + JSON.stringify(blocks[i], null, 4)].join(': '));
+				if (this.config.isDebug) output += self.debug(['block[' + i + ']=' + JSON.stringify(blocks[i], null, 4)].join(': '));
 				//if (config.isDebug) console.log(['DEBUG','block[' + i + ']=' + JSON.stringify(blocks[i], null, 4)].join(': '));
 				
 				try {
@@ -451,7 +449,7 @@ var Output = function (config) {
 		};
 
 		//Очистка кода
-		if (config.clear) {
+		if (this.config.clear) {
 			//Удаление комментариев <!-- --> в html
 			output = output.replace(self.re['comments_html'], '');
 			//Поиск стилей
@@ -464,7 +462,6 @@ var Output = function (config) {
 			output = output.replace(self.re['scripts'], function (s, a1, a2, a3) {
 				//Удаление комментариев // (применять первым и осторожно! можно удалить http://)
 				a2 = a2.replace(self.re['comments_slash'], '');
-				//a2 = a2.replace(/(^|\s+|;)(?:\/\/[^\r\n]*?)(\r\n|$)/g, '$1$2');
 				//Удаление комментариев /**/
 				a2 = a2.replace(self.re['comments_stars'], '');
 				return a1 + a2 + a3;
