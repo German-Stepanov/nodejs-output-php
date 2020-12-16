@@ -1,0 +1,13 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "Demo for output-view",
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "German Stepanov",
+  "license": "ISC"
+}

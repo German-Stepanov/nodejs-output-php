@@ -6,7 +6,7 @@ myConfig.data = {
 	isDebug		: true,		//Сообшения сервера
 };
 
-var output = require('output-view')({
+var output = require('../index.js')({
 	//Папка отображений
 	dir 		: './',
 	//Очищать код		
