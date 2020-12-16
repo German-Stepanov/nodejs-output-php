@@ -1,6 +1,6 @@
 {
   "name": "output-view",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "PHP template preprocessor for nodejs",
   "main": "index.js",
   "dependencies": {},
