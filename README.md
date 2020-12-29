@@ -7,7 +7,7 @@
   	Объекты
   	Функции
 Поддерживает использование логических блоков
-  	if-elseif-else-endif
+  	if-else-endif
   	foreach-endforeach
   	for-endfor
   	while-endwhile
