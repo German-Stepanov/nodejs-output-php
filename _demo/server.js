@@ -1,29 +1,20 @@
-﻿//Устанавливаем конфигурацию
+﻿//Конфигурация (глобальная)
 myConfig = {};
-//Конфигурация пользователя (глобальная)
-myConfig.data = {
+//Конфигурация сервера
+myConfig.server = {
 	port		: 2020,
 	isDebug		: true,		//Сообшения сервера
 };
-
+//Подключение модуля
 var output = require('../index.js')({
-	//Папка отображений
-	dir 		: './',
-	//Очищать код		
-	clear 		: true,
-	//Режим отладки
-	isDebug		: false,						
+	dir 		: './',		//Папка отображений
+	clear 		: true,		//Очищать код от комментариев
+	isDebug		: false,	//Режим отладки					
 });
 
-var http = require('http');
-//Формируем задачу
-var app = function(req, res) {
-	//Установим метку времени
-	if (myConfig.data.isDebug) {
-		console.log('\nПолучен запрос req.url', req.url);
-		console.time('app');
-	}
-
+var controller = function (req, res) {
+	var url = req.url.split('/');
+	
 	var rows = 
 	[
 		{user_id: 11, user_name:'Андрей', 	user_family:'Иванов', 	user_active:1},
@@ -47,7 +38,8 @@ var app = function(req, res) {
 			file	: '/test.php', 
 			//Переменные
 			data	: {
-				$title 	: 'Список участников:',
+				$test	: url[1],
+				$title 	: 'Тесты',
 				$rows 	: rows,
 				width_10: function(str) {
 					var count = 10;
@@ -59,11 +51,28 @@ var app = function(req, res) {
 	
 	res.end();
 	
+}
+//Формируем задачу
+var app = function(req, res) {
+	var url = req.url.split('/');
+
+	//Заглушка запроса favicon.ico
+	if (url[1]=='favicon.ico') return;
+
+	//Установим метку времени
+	if (myConfig.server.isDebug) {
+		console.log('\nПолучен запрос req.url', req.url);
+		console.time('app');
+	}
+	
+	//Вызываем контроллер обработки запроса	
+	controller(req, res);
+	
 	//Выводим общее время
-	if (myConfig.data.isDebug) console.timeEnd('app');
+	if (myConfig.server.isDebug) console.timeEnd('app');
 };
 //Создаем и запускаем сервер для задачи
-var server = http.createServer(app);
-server.listen(myConfig.data.port);
+var server = require('http').createServer(app);
+server.listen(myConfig.server.port);
 //Отображаем информацию о старте сервера
-if (myConfig.data.isDebug) console.log('Server start on port ' + myConfig.data.port + ' ...');
+if (myConfig.server.isDebug) console.log('Server start on port ' + myConfig.server.port + ' ...');
