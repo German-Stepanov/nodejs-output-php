@@ -123,24 +123,21 @@ var Output = function (config) {
 					
 					//Извлекаем из кода php "elseif". Заменяем блоками else и if
 					php = php.replace(self.re['elseif'], function (s, condition) {
+						blocks.push ({
+							type	: 'else',
+						});
 						//Поиск индекса ближайшего блока if
 						var index = blocks.length-1;
 						while (index>=0) {
-							if (blocks[index].type=='if' && blocks[index].level>0) break;
+							if (blocks[index].type=='if') break;
 							index--;
 						}
-						if (index>=0) {
-							blocks[index].level++;
-							blocks.push ({
-								type	: 'else',
-							});
-							blocks.push ({
-								type		: 'if',
-								condition	: condition,
-								level		: 0,
-							})
-							return '';//удаляем найденый код
-						}
+						blocks.push ({
+							type		: 'if',
+							condition	: condition,
+							level		: blocks[index].level + 1,
+						})
+						return '';//удаляем найденый код
 					});
 					if (!php) return ''; //удаляем код блока PHP
 					
@@ -158,19 +155,19 @@ var Output = function (config) {
 						//Поиск индекса ближайшего блока if
 						var index = blocks.length-1;
 						while (index>=0) {
-							if (blocks[index].type=='if' && blocks[index].level>0) break;
+							if (blocks[index].type=='if' && blocks[index].level>0) {
+								//Вставляем блоки endif нужное число раз
+								for (var i=0; i<blocks[index].level; i++) {
+									blocks.push ({
+										type	: 'endif',
+									})
+								}
+								blocks[index].level--;
+								break;
+							}
 							index--;
 						}
-						if (index>=0) {
-							//Вставляем блоки endif нужное число раз
-							for (var i=0; i<blocks[index].level; i++) {
-								blocks.push ({
-									type	: 'endif',
-								})
-							}
-							blocks[index].level=0;
-							return '';//удаляем найденый код
-						}
+						return '';//удаляем найденый код
 					});
 					if (!php) return ''; //удаляем код блока PHP
 					
