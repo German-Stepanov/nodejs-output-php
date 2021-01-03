@@ -3,30 +3,30 @@
 
 Поддерживает передачу чисел, строк, объектов и функций в файл html(php), например
 ```JS
-	var rows = 
-	[
-		{user_id: 11, user_name:'Андрей', 	user_family:'Иванов', 	user_active:1},
-		{user_id: 121, user_name:'Петр', 	user_family:'Петров', 	user_active:1},
-		{user_id: 13, user_name:'Алексей',	user_family:'Сидоров', 	user_active:1},
-		{user_id: 142, user_name:'Сергей', 	user_family:'Алексеев', user_active:1},
-		{user_id: 15, user_name:'Герман', 	user_family:'Степанов', user_active:0},
-	];
-	res.write(
-		output.view({
-			//Название файла
-			file	: '/test.php', 
-			//Переменные
-			data	: {
-				$count	: 100,
-				$title 	: 'Тесты',
-				$rows 	: rows,
-				width_10: function(str) {
-					var count = 10;
-					return (new Array( count ).join(' ') + str).substr(-count).replace(/ /g, '&nbsp;');
-				}
-			},
-		})
-	);
+var rows = 
+[
+	{user_id: 11, user_name:'Андрей', 	user_family:'Иванов', 	user_active:1},
+	{user_id: 121, user_name:'Петр', 	user_family:'Петров', 	user_active:1},
+	{user_id: 13, user_name:'Алексей',	user_family:'Сидоров', 	user_active:1},
+	{user_id: 142, user_name:'Сергей', 	user_family:'Алексеев', user_active:1},
+	{user_id: 15, user_name:'Герман', 	user_family:'Степанов', user_active:0},
+];
+res.write(
+	output.view({
+		//Название файла
+		file	: '/test.php', 
+		//Переменные
+		data	: {
+			$count	: 100,
+			$title 	: 'Тесты',
+			$rows 	: rows,
+			width_10: function(str) {
+				var count = 10;
+				return (new Array( count ).join(' ') + str).substr(-count).replace(/ /g, '&nbsp;');
+			}
+		},
+	})
+);
 ```
 Поддерживает использование логических блоков if...elseif...else...endif, например
 ```HTML+PHP
@@ -40,44 +40,44 @@
 ```
 Поддерживает использование логических блоков foreach...endforeach, например
 ```HTML+PHP
-  	<?php foreach($rows as $key=>$value): ?>
-		...
-	<?php endforeach; ?>
+<?php foreach($rows as $key=>$value): ?>
+	...
+<?php endforeach; ?>
 ```
 Поддерживает использование логических блоков for...endfor, например
 ```HTML+PHP
-  	<?php for($i=0; $i<10; $i++): ?>
-		...
-	<?php endfor; ?>
+<?php for($i=0; $i<10; $i++): ?>
+	...
+<?php endfor; ?>
 ```
 Поддерживает использование логических блоков while...endwhile, например
 ```HTML+PHP
-  	<?php while($i<100): ?>
-		...
-		<?
-			$i++;
-		?>
-	<?php endfor; ?>
-```
-
-Поддерживает любые переменные и выражения на js, например
-```HTML+PHP
-  	<?=$название?>
-	...
-  	<?=$переменная1 * переменная2?>
-```
-
-Поддерживает создание и использование переменных внутри кода HTML, например
-```HTML+PHP
-	<?
-		var $i=1;
-	?>
+<?php while($i<100): ?>
 	...
 	<?
 		$i++;
 	?>
+<?php endfor; ?>
+```
 
-	<?=$i?>
+Поддерживает любые переменные и выражения на js, например
+```HTML+PHP
+<?=$название?>
+...
+<?=$переменная1 * переменная2?>
+```
+
+Поддерживает создание и использование переменных внутри кода HTML, например
+```HTML+PHP
+<?
+	var $i=1;
+?>
+...
+<?
+	$i++;
+?>
+
+<?=$i?>
 ```
 
 Очищает код от всех комментариев, пробелов и переносов строк (опционально)
