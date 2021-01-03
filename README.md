@@ -30,13 +30,13 @@ res.write(
 ```
 Поддерживает использование логических блоков if...elseif...else...endif, например
 ```HTML+PHP
-  	<?php if($key>10): ?>
-		...
-	<?php elseif($key<5): ?>
-		...
-	<?php else: ?>
-		...
-	<?php endif; ?>
+<?php if($key>10): ?>
+	...
+<?php elseif($key<5): ?>
+	...
+<?php else: ?>
+	...
+<?php endif; ?>
 ```
 Поддерживает использование логических блоков foreach...endforeach, например
 ```HTML+PHP
