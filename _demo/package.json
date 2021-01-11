@@ -7,7 +7,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "demo": "node server"
+    "start": "node server"
   },
   "author": "German Stepanov",
   "license": "ISC"
